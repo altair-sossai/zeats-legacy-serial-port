@@ -19,10 +19,49 @@ Install-Package Zeats.Legacy.SerialPort
 
 ## Extensions
 
-### IpValidator.IsIpV4(string serial-port)
-Checks if the content of a string is a valid SerialPort V4
+### SerialPortManager.Get(string portName)
+Get a SerialPort
 ```c#
-IpValidator.IsIpV4("10.a.30.40") /* return false */
-IpValidator.IsIpV4("10.0.0.150") /* return true */
+SerialPortManager.Get("COM1") /* return SerialPort COM1 */
+SerialPortManager.Get("COM2") /* return SerialPort COM2 */
+```
+---
+
+### SerialPortManager.Open(OpenPortCommand command)
+Open connection with serial port
+```c#
+
+public class OpenPortCommand
+{
+    public string PortName { get; set; }
+    public Parity Parity { get; set; }
+    public int BaudRate { get; set; }
+    public int DataBits { get; set; }
+    public StopBits StopBits { get; set; }
+}
+
+SerialPortManager.Open(command) /* return SerialPort */
+```
+---
+
+### SerialPortManager.Close(string portName)
+Close the connection with serial port
+```c#
+SerialPortManager.Close("COM1")
+```
+---
+
+### SerialPortManager.Write(string portName, string message)
+Write a message in a serial port
+```c#
+SerialPortManager.Write("COM1", "SAMPLE-MESSAGE")
+SerialPortManager.Write("COM1", Convert.ToChar(5).ToString(CultureInfo.InvariantCulture))
+```
+---
+
+### SerialPortManager.ReadExisting(string portName, string message)
+Get a message from a serial port
+```c#
+SerialPortManager.ReadExisting("COM1") /* return string */
 ```
 ---

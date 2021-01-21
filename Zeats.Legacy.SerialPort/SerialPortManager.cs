@@ -8,14 +8,32 @@ namespace Zeats.Legacy.SerialPort
         private static readonly object Lock = new object();
         private static readonly Dictionary<string, System.IO.Ports.SerialPort> SerialPorts = new Dictionary<string, System.IO.Ports.SerialPort>();
 
-        public static void Open(OpenPortCommand command)
+        public static System.IO.Ports.SerialPort Get(string portName)
+        {
+            lock (Lock)
+            {
+                if (SerialPorts.ContainsKey(portName))
+                    return SerialPorts[portName];
+
+                var serialPort = new System.IO.Ports.SerialPort
+                {
+                    PortName = portName
+                };
+
+                SerialPorts.Add(portName, serialPort);
+
+                return SerialPorts[portName];
+            }
+        }
+
+        public static System.IO.Ports.SerialPort Open(OpenPortCommand command)
         {
             lock (Lock)
             {
                 var serialPort = Get(command.PortName);
 
                 if (serialPort.IsOpen)
-                    return;
+                    return serialPort;
 
                 serialPort.Parity = command.Parity;
                 serialPort.BaudRate = command.BaudRate;
@@ -23,6 +41,8 @@ namespace Zeats.Legacy.SerialPort
                 serialPort.StopBits = command.StopBits;
 
                 serialPort.Open();
+
+                return serialPort;
             }
         }
 
@@ -60,24 +80,6 @@ namespace Zeats.Legacy.SerialPort
                     serialPort.Open();
 
                 return serialPort.ReadExisting();
-            }
-        }
-
-        private static System.IO.Ports.SerialPort Get(string portName)
-        {
-            lock (Lock)
-            {
-                if (SerialPorts.ContainsKey(portName))
-                    return SerialPorts[portName];
-
-                var serialPort = new System.IO.Ports.SerialPort
-                {
-                    PortName = portName
-                };
-
-                SerialPorts.Add(portName, serialPort);
-
-                return SerialPorts[portName];
             }
         }
     }
