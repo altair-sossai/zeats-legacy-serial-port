@@ -6,7 +6,7 @@
 
 # zeats-legacy-serial-port
 
-Extensions to solve common problems when working with SerialPort
+Methods to solve common problems when working with SerialPort
 
 [![Build Status](https://dev.azure.com/zeats/Legacy/_apis/build/status/zeats-legacy-serial-port?branchName=master)](https://dev.azure.com/zeats/Legacy/_build/latest?definitionId=34&branchName=master)
 [![NuGet](https://img.shields.io/nuget/v/Zeats.Legacy.SerialPort.svg)](https://www.nuget.org/packages/Zeats.Legacy.SerialPort)
@@ -17,7 +17,7 @@ Extensions to solve common problems when working with SerialPort
 Install-Package Zeats.Legacy.SerialPort
 ```
 
-## Extensions
+## Methods
 
 ### SerialPortManager.Get(string portName)
 Get a SerialPort

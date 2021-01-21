@@ -4,7 +4,7 @@
   <metadata>
     <id>Zeats.Legacy.SerialPort</id>
     <version>1.0.0.0</version>
-    <description>Extensions to solve common problems when working with SerialPort</description>
+    <description>Methods to solve common problems when working with SerialPort</description>
     <authors>altairsossai@gmail.com</authors>
     <owners>altairsossai</owners>
     <projectUrl>https://github.com/altair-sossai/zeats-legacy-serial-port</projectUrl>
